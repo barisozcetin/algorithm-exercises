@@ -32,11 +32,20 @@ class BST {
       }
     }
   }
-  depthFirstTraversal(itaratorFunc, order) {
+  depthFirstTraversal(iteratorFunc, order) {
     if (order === "pre-order") iteratorFunc(this.value);
     if (this.left) this.left.depthFirstTraversal(iteratorFunc, order);
     if (order === "in-order") iteratorFunc(this.value);
     if (this.right) this.right.depthFirstTraversal(iteratorFunc, order);
     if (order === "post-order") iteratorFunc(this.value);
+  }
+  breadthFirstTraversal(iteratorFunc) {
+    const queue = [this];
+    while (queue.length) {
+      let treeNode = queue.shift();
+      iteratorFunc(treeNode);
+      if (treeNode.left) queue.push(treeNode.left);
+      if (treeNode.right) queue.push(treeNode.right);
+    }
   }
 }
